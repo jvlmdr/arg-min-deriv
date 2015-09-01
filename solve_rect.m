@@ -21,8 +21,8 @@ function [x, mul_dx_dA, mul_dx_db] = solve_rect(A, b)
 % G = A' * A;
 % C = inv(G);
 % x = C * (A' * b);
-% mul_dx_dA = @(V) C * (V'*(b-A*x) - A'*(V*x));
 % mul_dx_db = @(v) C * (A' * v);
+% mul_dx_dA = @(V) C * (V'*(b-A*x) - A'*(V*x));
 
 [Q, R] = qr(A, 0);
 % A = Q R, Q' Q = I (but not Q Q' = I)

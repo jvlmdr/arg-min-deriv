@@ -20,13 +20,11 @@ if m ~= n
   error('not square');
 end
 
-% Old version using explicit inverse.
+% % Old version using explicit inverse.
 % C = inv(A);
 % x = C * b;
-% dx_db = C;
-% dx_da = -kron(x', C);
-% mul_dx_db = @(v) dx_db * v;
-% mul_dx_dA = @(V) dx_da * V(:);
+% mul_dx_db = @(v) C * v;
+% mul_dx_dA = @(V) -C * V * x;
 
 [L, U] = lu(A);
 % A x = b
