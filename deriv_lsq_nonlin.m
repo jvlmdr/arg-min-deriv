@@ -1,16 +1,19 @@
-% y(x) = argmin_y |r(x, y)|^2
-% using approximation
-% |r(x, y)|^2 ~ |r(x, y_hat+dy)|^2
-%
-% Returns:
-% dy/dx(x)
+function dy_dx = deriv_lsq_nonlin(rfun, x, y_hat, m, n)
+% deriv_lsq_nonlin estimates the derivative of
+%   y(x) = argmin_y |r(x, y)|^2 .
 %
 % Parameters:
 % [r, dr_dx, dr_dy, d2r_dxdy] = rfun(x, y)
-%   d2r_dxdy(i, j, k) = d2r(i) / dx(j) dy(k).
-% y_hat = argmin_y |r(x, y)|^2 (roughly)
-% x has length m, y has length n.
-function dy_dx = deriv_lsq_nonlin(rfun, x, y_hat, m, n)
+%   x has size [m, 1].
+%   y has size [n, 1].
+%   r has size [p, 1].
+%   dr_dx has size [p, m] and dr_dx(i, j) = dr(i) / dx(j).
+%   dr_dy has size [p, n] and dr_dy(i, j) = dr(i) / dy(j).
+%   d2r_dxdy has size [p, m, n] and dr2_dxdy(i, j, k) = d^2 r(i) / dx(j) dy(k).
+% y_hat is an estimate of y(x).
+%
+% Returns:
+% dy_dx has size (n, m).
 
 [r, dr_dx, dr_dy, d2r_dxdy] = rfun(x, y_hat);
 A = dr_dy;

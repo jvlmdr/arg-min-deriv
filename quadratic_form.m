@@ -1,15 +1,19 @@
 function [r, dr_dx, dr_dy, d2r_dxdy] = quadratic_form(a, x, y, m, n, p)
-% size(x) is [m, 1]
-% size(y) is [n, 1]
-% size(a) is [p, m+n+1, m+n+1]
+% quadratic_form computes r = A kron(z, z) where z = [x; y; 1].
+% It also returns its derivatives.
+%
+% Parameters:
+% x has size [m, 1].
+% y has size [n, 1].
+% a has size [p, m+n+1, m+n+1].
 
 z = [x; y; 1];
 
 i_x = 1:m;
 i_y = m+(1:n);
 
+% Old version using Kronecker products.
 % r = reshape(a, [p, (m+n+1)^2]) * kron(z, z);
-% 
 % % d/dz kron(z, z)
 % % = d/dz vec(z z')
 % % = (z kron I) dz/dz + (I kron z) dz'/dz
